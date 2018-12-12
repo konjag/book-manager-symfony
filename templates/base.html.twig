@@ -2,13 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome2!{% endblock %}</title>
+        <title>{% block title %}Books Manager{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="ui container">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
