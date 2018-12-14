@@ -36,7 +36,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="current_reader_1")
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="current_reader")
      */
     private $books;
 
