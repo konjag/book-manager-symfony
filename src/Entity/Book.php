@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Book
 {
@@ -189,5 +190,27 @@ class Book
         $this->current_reader = $current_reader;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+        $this->setLocationUpdatedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setInitialIsBorrowed()
+    {
+        $this->setIsBorrowed(false);
     }
 }
