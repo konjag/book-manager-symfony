@@ -9,7 +9,7 @@
 require('semantic-ui-css/semantic.min.css');
 require('../scss/app.scss');
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+var $ = require('jquery');
+window.$ = window.jQuery = $;
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+require('semantic-ui-css/semantic.min');

@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form 'form/fields.html.twig' %}
+
 {% block body %}
-    <h1>Add a new book</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="ui grid centered">
+        <div class="eight wide column">
+            <h1>Add a new book</h1>
+            {{ form(form) }}
+        </div>
+    </div>
 {% endblock %}
