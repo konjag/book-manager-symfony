@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BooksController extends AbstractController
 {
+    /**
+     * @Route("/")
+     */
+    public function list() {
+        $books = $this->getDoctrine()->getRepository(Book::class)->findAll();
+
+        return $this->render('books/list.html.twig', [
+            'books' => $books
+        ]);
+    }
+
     /**
      * @Route("/add")
      */

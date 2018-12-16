@@ -8,7 +8,7 @@
 <div class="ui middle aligned center aligned grid page-login__grid">
     <div class="column page-login__column">
         <h1 class="ui green header">Log in to your account</h1>
-        <form method="post" class="ui large form">
+        <form method="post" class="ui large form {% if error %}error{% endif %}">
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
             >
