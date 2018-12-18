@@ -1,16 +1,23 @@
-<div class="ui top large fixed inverted green menu">
+<div class="ui top large fixed inverted green menu header">
     <div class="ui container">
         <a href="{{ path('app_homepage') }}" class="header item">Books Manager</a>
-        <div class="ui simple dropdown item">
-            Library
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <a href="{{ path('app_books_list') }}" class="item">Books list</a>
-                <a href="{{ path('app_books_add') }}" class="item">Add a book</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="ui simple dropdown item">
+                Library
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a href="{{ path('app_books_list') }}" class="item">Books list</a>
+                    <a href="{{ path('app_books_add') }}" class="item">Add a book</a>
+                </div>
             </div>
-        </div>
+        {% endif %}
         <div class="item right">
-            <a href="{{ path('app_login') }}" class="ui inverted button">Log in</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_logout') }}" class="ui inverted button header__button">Log out</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="ui inverted button header__button">Log in</a>
+                <a href="{{ path('app_register') }}" class="ui inverted button header__button">Register</a>
+            {% endif %}
         </div>
     </div>
 </div>
