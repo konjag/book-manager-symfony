@@ -5,11 +5,10 @@
 {% form_theme form 'form/fields.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
-        <button type="submit" class="ui primary button">Register!</button>
-    {{ form_end(form) }}
+    <div class="ui grid centered">
+        <div class="eight wide column">
+            <h1>Sign up</h1>
+            {{ form(form) }}
+        </div>
+    </div>
 {% endblock %}

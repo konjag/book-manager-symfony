@@ -1,6 +1,5 @@
 .page-login {
     height: 100%;
-    margin-top: -120px;
 
     &__grid {
         height: 100%;
@@ -8,5 +7,6 @@
 
     &__column {
         max-width: 400px;
+        margin-top: -120px;
     }
 }
