@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Welcome to the Books Manager</h1>
-    <h2>Here are your currently borrowed books:</h2>
+    <h1>Welcome to the Books Manager!</h1>
+    <h2>Borrowed books:</h2>
     <table class="ui green table">
         <thead>
         <tr>
             <th>Title</th>
             <th>Author</th>
             <th>Location</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
                         'App\\Controller\\BooksController::updateLocation',
                         { 'id': book.id }
                     )) }}
+                </td>
+                <td>
+                    <a href="{{ path('app_books_return', { 'id': book.id }) }}" class="ui primary button">Return</a>
                 </td>
             </tr>
         {% endfor %}

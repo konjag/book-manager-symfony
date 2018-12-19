@@ -64,6 +64,19 @@ class BooksController extends AbstractController
     }
 
     /**
+     * @Route("/return/{id}")
+     */
+    public function return($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
+        $book->setIsBorrowed(false);
+        $book->setCurrentReader(null);
+        $entityManager->flush();
+
+        return $this->render('books/return_success.html.twig');
+    }
+
+    /**
      * @Route("/update-location/{id}", name="app_books_update_location")
      */
     public function updateLocation(Request $request, $id)
@@ -79,7 +92,15 @@ class BooksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage');
+            $referer = $request->headers->get('referer');
+
+            if ($referer == NULL) {
+                $url = $this->generateUrl('app_homepage');
+            } else {
+                $url = $referer;
+            }
+
+            return $this->redirect($url);
         }
 
         return $this->render('books/update_location.html.twig', [
