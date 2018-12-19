@@ -13,3 +13,5 @@ var $ = require('jquery');
 window.$ = window.jQuery = $;
 
 require('semantic-ui-css/semantic.min');
+
+require('./main');

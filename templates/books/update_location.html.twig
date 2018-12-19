@@ -1,0 +1,10 @@
+{% form_theme form 'form/fields.html.twig' %}
+
+<div class="ui small modal" data-modal="book-location:{{ id }}">
+    <i class="close icon"></i>
+    <div class="header">Change the location</div>
+    <div class="content">
+        {{ form(form) }}
+    </div>
+</div>
+

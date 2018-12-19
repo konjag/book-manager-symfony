@@ -16,7 +16,14 @@
             <tr>
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
-                <td>{{ book.location }}</td>
+                <td>
+                    {{ book.location }}
+                    (<a href="#" data-modal-trigger="book-location:{{ book.id }}">change</a>)
+                    {{ render(controller(
+                        'App\\Controller\\BooksController::updateLocation',
+                        { 'id': book.id }
+                    )) }}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
