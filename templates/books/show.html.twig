@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid centered">
+        <div class="eight wide column">
+            <h1>{{ book.title }} by {{ book.author }}</h1>
+            <p>
+                <strong>Owner</strong><br>
+                {{ book.owner }}
+            </p>
+            <p>
+                <strong>Location</strong><br>
+                {{ book.location }}
+            </p>
+            <p>
+                <strong>Description</strong><br>
+                {{ book.description }}
+            </p>
+            {% if book.isBorrowed %}
+                <p>This book is being read by {{ book.currentReader.username }}.</p>
+            {% else %}
+                <a href="{{ path('app_books_borrow', { 'id': book.id }) }}" class="ui primary button">Borrow</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

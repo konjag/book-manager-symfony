@@ -41,7 +41,7 @@ class BooksController extends AbstractController
             $entityManager->persist($book);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage');
+            return $this->redirectToRoute('app_books_list');
         }
 
         return $this->render('books/add.html.twig', [
@@ -50,7 +50,19 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/borrow/{id}")
+     * @Route("/{id<\d+>}")
+     */
+    public function show($id)
+    {
+        $book = $this->getDoctrine()->getManager()->getRepository(Book::class)->find($id);
+
+        return $this->render('books/show.html.twig', [
+            'book' => $book
+        ]);
+    }
+
+    /**
+     * @Route("/borrow/{id<\d+>}")
      */
     public function borrow($id)
     {
@@ -64,9 +76,10 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/return/{id}")
+     * @Route("/return/{id<\d+>}")
      */
-    public function return($id) {
+    public function return($id)
+    {
         $entityManager = $this->getDoctrine()->getManager();
         $book = $entityManager->getRepository(Book::class)->find($id);
         $book->setIsBorrowed(false);
@@ -77,7 +90,7 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/update-location/{id}", name="app_books_update_location")
+     * @Route("/update-location/{id<\d+>}", name="app_books_update_location")
      */
     public function updateLocation(Request $request, $id)
     {
