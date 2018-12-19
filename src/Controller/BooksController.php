@@ -47,4 +47,18 @@ class BooksController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/borrow/{id}")
+     */
+    public function borrow($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
+        $book->setIsBorrowed(true);
+        $book->setCurrentReader($this->getUser());
+        $entityManager->flush();
+
+        return $this->render('books/borrow_success.html.twig');
+    }
 }

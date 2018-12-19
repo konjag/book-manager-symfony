@@ -16,7 +16,13 @@
                     <td>{{ book.title }}</td>
                     <td>{{ book.author }}</td>
                     <td>{{ book.location }}</td>
-                    <td>{{ book.currentReader }}</td>
+                    <td>
+                        {% if book.isBorrowed %}
+                            {{ book.currentReader.username }}
+                        {% else %}
+                            <a href="{{ path('app_books_borrow', { 'id': book.id }) }}" class="ui green button">Borrow</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
