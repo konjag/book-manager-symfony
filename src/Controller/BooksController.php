@@ -62,6 +62,28 @@ class BooksController extends AbstractController
     }
 
     /**
+     * @Route("/edit/{id<\d+>}")
+     */
+    public function edit(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_books_list');
+        }
+
+        return $this->render('books/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * @Route("/borrow/{id<\d+>}")
      */
     public function borrow($id)

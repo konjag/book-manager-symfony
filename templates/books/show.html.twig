@@ -21,6 +21,7 @@
             {% else %}
                 <a href="{{ path('app_books_borrow', { 'id': book.id }) }}" class="ui primary button">Borrow</a>
             {% endif %}
+            <a href="{{ path('app_books_edit', { 'id': book.id }) }}" class="ui primary button">Edit</a>
         </div>
     </div>
 {% endblock %}
